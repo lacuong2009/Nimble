@@ -26,6 +26,18 @@ return [
 
     'model' => \App\Entities\User::class,
 
+    'defaults' => [
+        'guard' => 'api',
+        'passwords' => 'users',
+    ],
+
+    'guards' => [
+        'api' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
+    ],
+
     'providers' => [
         'users' => [
             'driver' => 'doctrine',

@@ -23,9 +23,8 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
-
-// $app->withEloquent();
+ $app->withFacades();
+ $app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -61,8 +60,8 @@ $app->singleton(
 
 $app->configure('app');
 $app->configure('swagger-lume');
-$app->withFacades();
-$app->withEloquent();
+$app->configure('auth');
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -81,6 +80,11 @@ $app->withEloquent();
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
+
+// Enable auth middleware (shipped with Lumen)
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+]);
 
 /*
 |--------------------------------------------------------------------------

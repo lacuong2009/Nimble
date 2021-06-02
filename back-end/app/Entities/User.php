@@ -14,7 +14,7 @@ use LaravelDoctrine\ORM\Auth\Authenticatable;
  * Class User
  * @package App\Entities
  * @\Doctrine\ORM\Mapping\Entity(repositoryClass="\App\Repositories\UserRepository")
- * @\Doctrine\ORM\Mapping\Table(name="user")
+ * @\Doctrine\ORM\Mapping\Table(name="`user`")
  * @\Doctrine\ORM\Mapping\HasLifecycleCallbacks
  */
 class User extends BaseEntity implements AuthenticatableContract, CanResetPasswordContract
@@ -37,6 +37,11 @@ class User extends BaseEntity implements AuthenticatableContract, CanResetPasswo
      * @\Doctrine\ORM\Mapping\Column(type="string", nullable=true)
      */
     protected $username;
+
+    /**
+     * @\Doctrine\ORM\Mapping\Column(type="boolean")
+     */
+    protected $status;
 
     /**
      * @\Doctrine\ORM\Mapping\Column(type="string")
@@ -153,26 +158,12 @@ class User extends BaseEntity implements AuthenticatableContract, CanResetPasswo
     {
         /** @var EntityManager $em */
         $em = app(EntityManager::class);
-        $user = $em->getRepository(get_class($this))->findOneBy(['Username' => $username]);
+        $user = $em->getRepository(get_class($this))->findOneBy(['username' => $username]);
 
-        if (!empty($user) && 0 === $user->Status) {
+        if (!empty($user) && 0 === $user->status) {
             throw new OAuthServerException('Unauthorized', 1000, 'invalid_credentials', 401);
         }
 
         return $user;
-    }
-
-    /**
-     * @Doctrine\ORM\Mapping\PrePersist
-     */
-    public function prePersist()
-    {
-    }
-
-    /**
-     * @Doctrine\ORM\Mapping\PreUpdate
-     */
-    public function preUpdated()
-    {
     }
 }

@@ -3,9 +3,22 @@
 
 namespace App\Entities;
 
-
+/**
+ * Class BaseEntity
+ * @package App\Entities
+ */
 class BaseEntity
 {
+    use TraitEntity;
+
+    /**
+     * @return array
+     */
+    public function toSimpleArray()
+    {
+        return get_object_vars($this);
+    }
+
     /**
      * @param $property
      * @return mixed
