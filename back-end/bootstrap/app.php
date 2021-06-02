@@ -61,7 +61,8 @@ $app->singleton(
 
 $app->configure('app');
 $app->configure('swagger-lume');
-
+$app->withFacades();
+$app->withEloquent();
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -98,6 +99,7 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(\SwaggerLume\ServiceProvider::class);
 $app->register(LaravelDoctrine\ORM\DoctrineServiceProvider::class);
+$app->register(\Laravel\Passport\PassportServiceProvider::class);
 
 class_alias('LaravelDoctrine\ORM\Facades\EntityManager', 'EntityManager');
 class_alias('LaravelDoctrine\ORM\Facades\Registry', 'Registry');
