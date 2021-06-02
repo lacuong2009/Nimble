@@ -1,0 +1,67 @@
+version: '3.1'
+services:
+  postgres:
+    image: postgres:13.0
+    container_name: postgres${DOCKER_ENV_VERSION}
+    restart: always
+    networks:
+      - default-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    command: postgres -c 'max_connections=10000'
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.docker/databases:/seeds
+
+  adminer:
+    image: adminer
+    container_name: adminer${DOCKER_ENV_VERSION}
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - default-network
+
+  web:
+    image: lacuong/nginx:1.0
+    container_name: web
+    ports:
+      - "80:80"
+    volumes:
+      - ./back-end:/app
+      - ./.docker/nginx/site/:/etc/nginx/conf.d/
+    dns:
+      - 8.8.8.8
+    restart: always
+    networks:
+      - default-network
+
+  php-fpm:
+    image: lacuong/php-fpm:1.1
+    container_name: php-fpm
+    ports:
+      - "9001:9001"
+    volumes:
+      - ./back-end:/app
+      - ./back-end/config/supervisor/:/etc/supervisor/conf.d/
+    dns:
+      - 8.8.8.8
+    restart: always
+    networks:
+      - default-network
+    command: [bash, -c, "/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf && php-fpm"]
+
+volumes:
+  pg-data:
+
+networks:
+  default-network:
+    external:
+      name: ${DOCKER_NETWORK}
