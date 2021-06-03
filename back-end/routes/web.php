@@ -11,6 +11,33 @@
 |
 */
 
+/** @var \Laravel\Lumen\Routing\Router $router */
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group([
+    'prefix' => 'oauth',
+    'namespace' => '\App\Http\Controllers',
+], function () use ($router) {
+    $router->post('/register','UsersController@register');
+    (new \App\Common\Route\RouteRegistrar($router))->all();
+});
+
+$router->group([
+    'prefix' => 'oauth',
+    'namespace' => '\App\Http\Controllers\Auth',
+], function () use ($router) {
+    (new \App\Common\Route\RouteRegistrar($router))->all();
+});
+
+$router->group([
+    'prefix' => 'api',
+    'namespace' => '\App\Http\Controllers',
+    'middleware' => ['auth']
+], function () use ($router) {
+    $router->get('/users/{username}','UsersController@show');
+});
+
+

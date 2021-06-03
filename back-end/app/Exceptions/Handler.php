@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Common\Response\ExceptionResponse;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
@@ -24,13 +25,7 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Report or log an exception.
-     *
-     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-     *
-     * @param  \Throwable  $exception
-     * @return void
-     *
+     * @param Throwable $exception
      * @throws \Exception
      */
     public function report(Throwable $exception)
@@ -39,16 +34,22 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
-     * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
-     *
-     * @throws \Throwable
+     * @param \Illuminate\Http\Request $request
+     * @param Throwable $exception
+     * @return ExceptionResponse
      */
     public function render($request, Throwable $exception)
     {
-        return parent::render($request, $exception);
+        if ($exception instanceof NotFoundException) {
+            return new ExceptionResponse($exception, 404);
+        }
+
+        if ($exception instanceof ClientException) {
+            return new ExceptionResponse($exception, 422);
+        }
+
+        if ($exception instanceof \Exception) {
+            return new ExceptionResponse($exception, 500);
+        }
     }
 }

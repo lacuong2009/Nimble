@@ -23,9 +23,8 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
-
-// $app->withEloquent();
+ $app->withFacades();
+ $app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +60,7 @@ $app->singleton(
 
 $app->configure('app');
 $app->configure('swagger-lume');
+$app->configure('auth');
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +81,11 @@ $app->configure('swagger-lume');
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
 
+// Enable auth middleware (shipped with Lumen)
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+]);
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -98,10 +103,7 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(\SwaggerLume\ServiceProvider::class);
 $app->register(LaravelDoctrine\ORM\DoctrineServiceProvider::class);
-
-class_alias('LaravelDoctrine\ORM\Facades\EntityManager', 'EntityManager');
-class_alias('LaravelDoctrine\ORM\Facades\Registry', 'Registry');
-class_alias('LaravelDoctrine\ORM\Facades\Doctrine', 'Doctrine');
+$app->register(\Laravel\Passport\PassportServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

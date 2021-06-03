@@ -17,5 +17,7 @@
         <env name="APP_ENV" value="testing"/>
         <env name="CACHE_DRIVER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="CLIENT_ID" value="2"/>
+        <env name="CLIENT_SECRET" value="937vXRO090liJPmvDhuJxMZSRIfcdmKnu2VXjzd8"/>
     </php>
 </phpunit>
