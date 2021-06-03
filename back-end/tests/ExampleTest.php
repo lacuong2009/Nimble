@@ -12,10 +12,7 @@ class ExampleTest extends TestCase
      */
     public function testExample()
     {
-        $this->get('/');
-
-        $this->assertEquals(
-            $this->app->version(), $this->response->getContent()
-        );
+        $a = file_get_contents('https://www.google.com/search?q=lego&oq=lego');
+        var_dump($a);
     }
 }

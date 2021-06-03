@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\FileService;
 use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton('UserService', function () {
             return new UserService();
+        });
+
+        $this->app->singleton('FileService', function () {
+            return new FileService();
         });
     }
 }

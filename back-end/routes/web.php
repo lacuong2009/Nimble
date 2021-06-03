@@ -37,7 +37,11 @@ $router->group([
     'namespace' => '\App\Http\Controllers',
     'middleware' => ['auth']
 ], function () use ($router) {
+    // User
     $router->get('/users/{username}','UsersController@show');
+
+    // API upload
+    $router->post('/files/upload','FileController@upload');
 });
 
 
