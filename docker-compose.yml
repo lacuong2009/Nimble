@@ -18,7 +18,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./.docker/databases:/seeds
+      - ./.docker/databases/seed-data.sql:/docker-entrypoint-initdb.d/1-init.sql
 
   adminer:
     image: adminer

@@ -105,10 +105,6 @@ $app->register(\SwaggerLume\ServiceProvider::class);
 $app->register(LaravelDoctrine\ORM\DoctrineServiceProvider::class);
 $app->register(\Laravel\Passport\PassportServiceProvider::class);
 
-class_alias('LaravelDoctrine\ORM\Facades\EntityManager', 'EntityManager');
-class_alias('LaravelDoctrine\ORM\Facades\Registry', 'Registry');
-class_alias('LaravelDoctrine\ORM\Facades\Doctrine', 'Doctrine');
-
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

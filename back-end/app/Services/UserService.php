@@ -7,6 +7,7 @@ use App\Exceptions\ClientException;
 use App\Exceptions\NotFoundException;
 use App\Helpers\UserHelper;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User as UserModel;
 
 /**
  * Class UserService
@@ -16,11 +17,12 @@ class UserService extends BaseService
 {
     /**
      * @param $params
-     * @return bool
+     * @return UserModel
+     * @throws ClientException
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function register($params)
+    public function register($params) : UserModel
     {
         $password = Hash::make($params['password']);
         $username = $params['email'];
@@ -40,7 +42,7 @@ class UserService extends BaseService
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush($user);
 
-        return true;
+        return UserHelper::makeModelUser($user);
     }
 
     /**
@@ -65,7 +67,7 @@ class UserService extends BaseService
      * @return \App\Models\User
      * @throws \Exception
      */
-    public function show($username)
+    public function show($username) : UserModel
     {
         return UserHelper::makeModelUser($this->getUserByUserName($username));
     }
