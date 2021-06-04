@@ -8,10 +8,10 @@ use App\Services\KeywordService;
 use Illuminate\Http\Request;
 
 /**
- * Class FileController
+ * Class KeywordController
  * @package App\Http\Controllers
  */
-class FileController extends Controller
+class KeywordController extends Controller
 {
     /**
      * @var KeywordService
@@ -19,7 +19,7 @@ class FileController extends Controller
     private $service;
 
     /**
-     * FileController constructor.
+     * KeywordController constructor.
      */
     public function __construct()
     {
@@ -28,7 +28,7 @@ class FileController extends Controller
 
     /**
      * @param Request $request
-     * @return bool
+     * @return bool[]
      * @throws InvalidArgumentException
      */
     public function upload(Request $request)
@@ -46,6 +46,6 @@ class FileController extends Controller
 
         $this->service->upload($file);
 
-        return true;
+        return ['success' => true];
     }
 }

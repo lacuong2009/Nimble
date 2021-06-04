@@ -41,7 +41,7 @@ $router->group([
     $router->get('/users/{username}','UsersController@show');
 
     // API upload
-    $router->post('/files/upload','FileController@upload');
+    $router->post('/keywords/file-upload','KeywordController@upload');
 });
 
 
