@@ -39,7 +39,7 @@ class UserTest extends TestCase
 
         $this->post('/oauth/register', [
             "name" => $faker->name,
-            "email" => 'a@a.se',
+            "email" => $faker->email,
             "password" => '123123'
         ])->assertResponseStatus(201);
     }

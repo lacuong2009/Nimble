@@ -40,7 +40,9 @@ $router->group([
     // User
     $router->get('/users/{username}','UsersController@show');
 
-    // API upload
+    // keywords
+    $router->get('/keywords','KeywordController@search');
+    $router->get('/keywords/{id}','KeywordController@show');
     $router->post('/keywords/file-upload','KeywordController@upload');
 });
 

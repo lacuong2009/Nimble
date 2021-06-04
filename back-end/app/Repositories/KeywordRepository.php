@@ -6,6 +6,7 @@ use App\Entities\Keyword;
 use App\Entities\QueueKeyWord;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * Class KeywordRepository
@@ -50,5 +51,35 @@ class KeywordRepository extends EntityRepository
             ->setMaxResults($limit);
 
         return $query->getQuery()->getResult();
+    }
+
+    /**
+     * @param $criteria
+     * @param int $page
+     * @param int $limit
+     * @return Paginator
+     */
+    public function search($criteria, $page = 1, $limit = 10)
+    {
+        $offset = ($page - 1) * $limit;
+
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $query = $qb->select('k')
+            ->from(Keyword::class, 'k')
+            ->where('1=1');
+
+        if (!empty($criteria->keyword)) {
+            $query->andWhere(
+                $qb->expr()->like('k.keyword', ':keyword')
+            )
+            ->setParameter('keyword', $criteria->keyword . '%%');
+        }
+
+        $query
+            ->orderBy('k.created', 'desc')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset);
+
+        return new Paginator($query);
     }
 }

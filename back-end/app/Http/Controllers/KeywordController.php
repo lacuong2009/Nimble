@@ -48,4 +48,27 @@ class KeywordController extends Controller
 
         return ['success' => true];
     }
+
+    /**
+     * @param Request $request
+     * @return \App\Common\Response\ApiResponse
+     */
+    public function search(Request $request)
+    {
+        $params = $request->all();
+        $page = $params['page'] ?? 1;
+        $limit = $params['limit'] ?? 10;
+
+        return $this->response($this->service->search($params, $page, $limit));
+    }
+
+    /**
+     * @param $id
+     * @return \App\Common\Response\ApiResponse
+     * @throws \App\Exceptions\NotFoundException
+     */
+    public function show($id)
+    {
+        return $this->response($this->service->show($id));
+    }
 }

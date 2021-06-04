@@ -3,8 +3,11 @@
 namespace App\Services;
 use App\Common\Reader\Adapter;
 use App\Entities\Keyword;
+use App\Exceptions\NotFoundException;
+use App\Helpers\KeywordHelper;
 use App\Jobs\CrawlerJob;
 use App\Repositories\KeywordRepository;
+use App\Utility;
 use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 
@@ -127,5 +130,50 @@ class KeywordService extends BaseService
                 $queueService->delete($queue->id);
             }
         }
+    }
+
+    /**
+     * @param $params
+     * @param $page
+     * @param $limit
+     * @return array
+     */
+    public function search($params, $page, $limit)
+    {
+        $criteria = (object) $params;
+        /** @var KeywordRepository $repos */
+        $repos = $this->getRepository(Keyword::class);
+        $paginator = $repos->search($criteria, $page, $limit);
+        $keywords = $paginator->getQuery()->getResult();
+        $items = [];
+
+        foreach ($keywords as $key => $keyword) {
+            $items[$key] = KeywordHelper::makeModelKeyword($keyword);
+            unset($items[$key]->html);
+        }
+
+        return [
+            'items' => $items,
+            'total' => $paginator->count(),
+            'page' => (int)$page,
+            'limit' => (int)$limit,
+        ];
+    }
+
+    /**
+     * @param $id
+     * @return \App\Models\Keyword
+     * @throws NotFoundException
+     */
+    public function show($id)
+    {
+        /** @var Keyword $entity */
+        $entity = $this->getRepository(Keyword::class)->find($id);
+
+        if (empty($entity)) {
+            throw new NotFoundException('Not found Keyword');
+        }
+
+        return KeywordHelper::makeModelKeyword($entity);
     }
 }
