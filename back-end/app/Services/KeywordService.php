@@ -9,10 +9,10 @@ use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 
 /**
- * Class FileService
+ * Class KeywordService
  * @package App\Services
  */
-class FileService extends BaseService
+class KeywordService extends BaseService
 {
     /**
      * @param UploadedFile $file

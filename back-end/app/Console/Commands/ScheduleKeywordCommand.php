@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\FileService;
+use App\Services\KeywordService;
 use Illuminate\Console\Command;
 
 /**
@@ -26,9 +26,9 @@ class ScheduleKeywordCommand extends Command
     protected $description = 'Run schedule to get data of keyword from google';
 
     /**
-     * @param FileService $service
+     * @param KeywordService $service
      */
-    public function handle(FileService $service)
+    public function handle(KeywordService $service)
     {
         $service->scheduleKeyword();
     }

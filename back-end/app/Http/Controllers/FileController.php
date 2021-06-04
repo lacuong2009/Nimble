@@ -4,7 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\InvalidArgumentException;
-use App\Services\FileService;
+use App\Services\KeywordService;
 use Illuminate\Http\Request;
 
 /**
@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 class FileController extends Controller
 {
     /**
-     * @var FileService
+     * @var KeywordService
      */
     private $service;
 
@@ -23,7 +23,7 @@ class FileController extends Controller
      */
     public function __construct()
     {
-        $this->service = app('FileService');
+        $this->service = app('KeywordService');
     }
 
     /**

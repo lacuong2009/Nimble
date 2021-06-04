@@ -10,7 +10,7 @@ class FileServiceTest extends TestCase
      */
     public function testGetNumberImportToday()
     {
-        /** @var \App\Services\FileService $service */
+        /** @var \App\Services\KeywordService $service */
         $service = app('FileService');
         $data = $service->getNumberImportToday();
 
@@ -20,7 +20,7 @@ class FileServiceTest extends TestCase
 
     public function testIsFullQuota()
     {
-        /** @var \App\Services\FileService $service */
+        /** @var \App\Services\KeywordService $service */
         $service = app('FileService');
         $data = $service->isFullQuota();
 
