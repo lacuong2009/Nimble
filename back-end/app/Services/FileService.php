@@ -4,6 +4,8 @@ namespace App\Services;
 use App\Common\Reader\Adapter;
 use App\Entities\Keyword;
 use App\Jobs\CrawlerJob;
+use App\Repositories\KeywordRepository;
+use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 
 /**
@@ -14,6 +16,8 @@ class FileService extends BaseService
 {
     /**
      * @param UploadedFile $file
+     * @return bool
+     * @throws \Exception
      */
     public function upload(UploadedFile $file)
     {
@@ -26,6 +30,8 @@ class FileService extends BaseService
         $name = time() . '.' . $file->getClientOriginalExtension();
         $file->move($path, $name);
         $this->process($path, $name);
+
+        return true;
     }
 
     /**
@@ -65,10 +71,61 @@ class FileService extends BaseService
             $this->getEntityManager()->persist($entity);
             $this->getEntityManager()->flush($entity);
 
-            // fire job
-            dispatch(new CrawlerJob(Keyword::class, $entity->id));
+            if ($this->isFullQuota()) {
+                // fire job
+                dispatch(new CrawlerJob(Keyword::class, $entity->id));
+            } else {
+                // store queue to db
+                /** @var QueueService $queue */
+                $queue = app('QueueService');
+                $queue->push($entity);
+            }
         }
 
         return $entity;
+    }
+
+    /**
+     * @return bool
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function isFullQuota() : bool
+    {
+        $quota = env('QUOTA_LIMIT_PER_DAY') ?? 100;
+        return $quota >= $this->getNumberImportToday();
+    }
+
+    /**
+     * @return int|mixed|string|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getNumberImportToday() : bool
+    {
+        /** @var KeywordRepository $repos */
+        $repos = $this->getRepository(Keyword::class);
+        $result = $repos->getNumberImportByDate(Carbon::now());
+
+        return !empty($result['num']) ? $result['num'] : 0;
+    }
+
+    /**
+     *
+     */
+    public function scheduleKeyword()
+    {
+        $quota = env('QUOTA_LIMIT_PER_DAY') ?? 100;
+        $now = Carbon::now();
+        /** @var KeywordRepository $repos */
+        $repos = $this->getRepository(Keyword::class);
+        $queues = $repos->getScheduleKeywords($now, $quota);
+        /** @var QueueService $queueService */
+        $queueService = app('QueueService');
+
+        if (count($queues) > 0) {
+            foreach ($queues as $queue) {
+                dispatch(new CrawlerJob(Keyword::class, $queue->keyword->id));
+                $queueService->delete($queue->id);
+            }
+        }
     }
 }

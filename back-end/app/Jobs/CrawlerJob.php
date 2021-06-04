@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Jobs;
+
 use App\Entities\Keyword;
 use App\Http\Clients\GoogleSearchClient;
 use App\Services\BaseService;
@@ -50,13 +51,15 @@ class CrawlerJob extends Job
      */
     private function editKeyword(Keyword $entity)
     {
+        $google = 'https://www.google.com/search?q=' . $entity->keyword;
         $results = $this->getResults($entity->keyword);
         $summary = $results->searchInformation;
 
+        $entity->totalAdWords = !empty($results->ads)? count($results->ads) : 0;
         $entity->totalLinks = $this->totalLinks($results->items);
         $entity->totalResults = $summary->totalResults;
         $entity->totalResultSeconds = $summary->formattedSearchTime;
-        $entity->html = file_get_contents('https://www.google.com/search?q=lego&oq=lego');
+        $entity->html = utf8_encode(file_get_contents($google)) ;
     }
 
     /**

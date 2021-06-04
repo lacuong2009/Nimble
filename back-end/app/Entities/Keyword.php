@@ -6,7 +6,7 @@ namespace App\Entities;
  * Class Keyword
  * @package App\Entities
  *
- * @\Doctrine\ORM\Mapping\Entity(repositoryClass="")
+ * @\Doctrine\ORM\Mapping\Entity(repositoryClass="\App\Repositories\KeywordRepository")
  * @\Doctrine\ORM\Mapping\Table(name="`keyword`")
  * @\Doctrine\ORM\Mapping\HasLifecycleCallbacks
  */
@@ -48,4 +48,9 @@ class Keyword extends BaseEntity
      * @\Doctrine\ORM\Mapping\Column(type="text", nullable=true)
      */
     protected $html;
+
+    /**
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="\App\Entities\QueueKeyWord", mappedBy="Keyword", cascade={"remove"})
+     **/
+    protected $Queue;
 }
