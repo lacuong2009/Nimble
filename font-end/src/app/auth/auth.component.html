@@ -1,0 +1,31 @@
+<div class="container">
+  <form class="login-page animate modal-content" novalidate>
+    <div class="imgcontainer">
+      <img src="../../assets/img_avatar2.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label for="username"><b>Username:</b></label>
+      <input type="text"
+             placeholder="Enter Username"
+             id="username"
+             name="username"
+             required
+             [(ngModel)]="model.username">
+
+      <label for="password"><b>Password: </b></label>
+      <input type="password"
+             placeholder="Enter Password"
+             id="password"
+             name="password"
+             required
+             [(ngModel)]="model.password">
+
+      <div class="clearfix">
+        <button type="button" class="signupbtn" [routerLink]="'/register'">Sign Up</button>
+        <button type="button" class="signinbtn" (click)="onSubmit()">Sign In</button>
+      </div>
+    </div>
+
+  </form>
+</div>
