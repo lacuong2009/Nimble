@@ -2,9 +2,14 @@
 
 namespace App\Console;
 
+use App\Console\Commands\ScheduleKeywordCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Lumen\Console\Kernel as ConsoleKernel;
 
+/**
+ * Class Kernel
+ * @package App\Console
+ */
 class Kernel extends ConsoleKernel
 {
     /**
@@ -13,7 +18,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        ScheduleKeywordCommand::class
     ];
 
     /**
@@ -24,6 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //
+        // trigger at mid night.
+        $schedule->command('schedule:keyword')->daily();
     }
 }
