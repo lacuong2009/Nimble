@@ -67,4 +67,18 @@ class UserTest extends TestCase
         $this->assertNotEmpty($data->data);
         $this->assertNotEmpty($data->data->id);
     }
+
+    public function testGetUserByUsername()
+    {
+        $this->get('api/users/a@a.se' , $this->defaultHeaders())
+            ->receiveJson()
+            ->assertResponseOk();
+
+        $content = (string) $this->response->getContent();
+        $data = json_decode($content);
+
+        $this->assertEquals($data->success, true);
+        $this->assertNotEmpty($data->data);
+        $this->assertNotEmpty($data->data->id);
+    }
 }
