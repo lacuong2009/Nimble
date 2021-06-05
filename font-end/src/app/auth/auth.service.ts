@@ -24,4 +24,8 @@ export class AuthService {
 
     return this.client.post('/oauth/token', data);
   }
+
+  public logout() {
+    return sessionStorage.clear();
+  }
 }

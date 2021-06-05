@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {KeywordService} from "./keyword.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {KeywordUploadComponent} from "./upload/keyword.upload.component";
 
 interface Keyword {
   id: number;
@@ -22,7 +24,8 @@ export class KeywordComponent implements OnInit, AfterViewInit {
   public strKeyword:string = '';
   public items: Keyword[] = [];
 
-  constructor(private keywordService: KeywordService) {
+  constructor(private keywordService: KeywordService,
+              private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -40,7 +43,6 @@ export class KeywordComponent implements OnInit, AfterViewInit {
         let data = response.data;
         this.items = data.items;
         this.collectionSize = data.total;
-        console.log(data);
       },
       (error: any) => {}
     );
@@ -54,5 +56,11 @@ export class KeywordComponent implements OnInit, AfterViewInit {
 
   public isAvailable() {
     return this.items && this.items.length > 0;
+  }
+
+  public uploadForm()
+  {
+    const modalRef = this.modalService.open(KeywordUploadComponent);
+    modalRef.componentInstance.name = 'Upload';
   }
 }

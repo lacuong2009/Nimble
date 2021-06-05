@@ -298,10 +298,12 @@
 <main id="layout-container">
   <header>
     <div class="toolbar" role="banner">
-      <img
-        alt="Logo"
-        src="../../../assets/nimble.png"
-      />
+      <a [routerLink]="'/'">
+        <img
+          alt="Logo"
+          src="../../../assets/nimble.png"
+        />
+      </a>
       <span></span>
       <div class="spacer"></div>
       <a aria-label="Logout" href="#" title="Logout">
@@ -314,7 +316,7 @@
     <nav>
       <ul>
         <li><a class="active" href="#">Keyword</a></li>
-        <li><a>Register</a></li>
+        <li><a [routerLink]="'/register'">Register</a></li>
         <li><a [routerLink]="'/profile'">Profile</a></li>
       </ul>
     </nav>

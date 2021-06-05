@@ -7,10 +7,11 @@ import {
 } from '@angular/common/http';
 import {catchError, finalize, switchMap, tap} from "rxjs/operators";
 import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
+import {AuthService} from "./auth.service";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
   public getToken(): string | null {
@@ -18,11 +19,8 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private logout() {
-    // this.authService.logout().then(() => {
-    //   window.location.href = '/';
-    // });
-
-    console.log('logout');
+    this.authService.logout();
+    window.location.href = '/';
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

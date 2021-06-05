@@ -2,17 +2,20 @@
   <div class="">
     <h3>Keyword Management</h3>
 
-    <div class="row float-right">
-        <form (submit)="search(strKeyword)" novalidate>
-          <div class="input-group mb-3">
-            <input type="text" name="search-keyword" class="form-control" placeholder="Search keyword" [(ngModel)]="strKeyword">
-
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" (click)="search(strKeyword)">Search</button>
-            </div>
-          </div>
+    <div class="navbar navbar-expand-lg">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <button type="button" class="btn btn-primary" (click)="uploadForm()">Upload (.csv)</button>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" (submit)="search(strKeyword)" novalidate>
+          <input name="search-keyword" class="form-control mr-sm-2" type="search" placeholder="Search keyword" [(ngModel)]="strKeyword">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+      </div>
     </div>
+
 
     <table class="table table-striped">
       <thead>

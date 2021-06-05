@@ -15,6 +15,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {TokenInterceptor} from "./auth/token.interceptor";
 import {KeywordDetailComponent} from "./keyword/details/keyword.detail.component";
+import {KeywordUploadComponent} from "./keyword/upload/keyword.upload.component";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {KeywordDetailComponent} from "./keyword/details/keyword.detail.component
     KeywordComponent,
     RegisterComponent,
     MainLayoutComponent,
-    KeywordDetailComponent
+    KeywordDetailComponent,
+    KeywordUploadComponent
   ],
   imports: [
     BrowserModule,

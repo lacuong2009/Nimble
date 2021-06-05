@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {GatewayClient} from "../shared/clients/gateway.client";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,12 @@ export class KeywordService {
   }
 
   public detail(id: number) {
-    let uri = '/api/keywords/' + id ;
+    let uri = '/api/keywords/' + id;
     return this.client.get(uri);
+  }
+
+  postFile(file: any) {
+    const endpoint = '/api/keywords/file-upload';
+    return this.client.post(endpoint, file);
   }
 }
