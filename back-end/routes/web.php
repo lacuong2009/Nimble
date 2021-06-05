@@ -38,8 +38,8 @@ $router->group([
     'middleware' => ['auth']
 ], function () use ($router) {
     // User
-    $router->get('/users/{username}','UsersController@show');
     $router->get('/users/me','UsersController@me');
+    $router->get('/users/{username}','UsersController@show');
 
     // keywords
     $router->get('/keywords','KeywordController@search');

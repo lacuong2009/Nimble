@@ -32,7 +32,12 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError(error => {
-        this.logout();
+        let code = error?.error?.code;
+
+        if (401 == code) {
+          this.logout();
+        }
+
         return throwError(error);
       }),
     );
