@@ -42,6 +42,8 @@ services:
     restart: always
     networks:
       - default-network
+    depends_on:
+      - api-init
 
   php-fpm:
     image: lacuong/php-fpm:1.1
@@ -58,7 +60,20 @@ services:
     networks:
       - default-network
     command: [bash, -c, "/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf && php-fpm"]
+    depends_on:
+      - api-init
 
+  api-init:
+    container_name: worker-init
+    image: lacuong/php-fpm:1.1
+    volumes:
+      - ./back-end:/app
+    working_dir: /app
+    entrypoint: [ "php", "artisan", "init:data" ]
+    networks:
+      - default-network
+    depends_on:
+      - postgres
 volumes:
   pg-data:
 
