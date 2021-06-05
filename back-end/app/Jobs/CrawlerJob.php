@@ -59,7 +59,9 @@ class CrawlerJob extends Job
         $entity->totalLinks = $this->totalLinks($results->items);
         $entity->totalResults = $summary->totalResults;
         $entity->totalResultSeconds = $summary->formattedSearchTime;
-        $entity->html = utf8_encode(file_get_contents($google)) ;
+        $res = (new GoogleSearchClient())->get($google);
+        $html = (string) $res->getBody()->getContents();
+        $entity->html = utf8_encode($html);
     }
 
     /**

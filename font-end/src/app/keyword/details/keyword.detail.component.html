@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <h5>Information details:</h5>
+
+  <form>
+    <div class="form-group">
+      <label>Keyword</label>
+      <input type="text"
+             class="form-control"
+             [(ngModel)]="model.keyword"
+             name="keyword">
+    </div>
+
+    <div class="form-group">
+      <label>Total Ads</label>
+      <input type="text"
+             class="form-control"
+             [(ngModel)]="model.totalAdWords"
+             name="totalAds">
+    </div>
+
+    <div class="form-group">
+      <label>Total links</label>
+      <input type="text"
+             class="form-control"
+             [(ngModel)]="model.totalLinks"
+             name="totalLinks">
+    </div>
+
+    <div class="form-group">
+      <label>Total results</label>
+      <input type="text"
+             class="form-control"
+             [(ngModel)]="model.totalResults"
+             name="totalResults">
+    </div>
+
+    <div class="form-group">
+      <label>Total result seconds</label>
+      <input type="text"
+             class="form-control"
+             [(ngModel)]="model.totalResultSeconds"
+             name="totalResultSeconds">
+    </div>
+
+    <div class="form-group">
+      <label>HTML</label>
+      <textarea
+        rows="10"
+        class="form-control"
+        [(ngModel)]="model.html"
+        name="html">
+
+      </textarea>
+    </div>
+  </form>
+
+</div>

@@ -1,1 +1,63 @@
-<p>keyword works!</p>
+<div class="container-fluid">
+  <div class="">
+    <h3>Keyword Management</h3>
+
+    <div class="navbar navbar-expand-lg">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <button type="button" class="btn btn-primary" (click)="uploadForm()">Upload (.csv)</button>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" (submit)="search(strKeyword)" novalidate>
+          <input name="search-keyword" class="form-control mr-sm-2" type="search" placeholder="Search keyword" [(ngModel)]="strKeyword">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Keyword</th>
+        <th scope="col">Total Ads</th>
+        <th scope="col">Total links</th>
+        <th scope="col">Results</th>
+      </tr>
+      </thead>
+      <tbody *ngIf="isAvailable()">
+      <tr *ngFor="let item of items">
+        <th scope="row">
+          {{ item.id }}
+        </th>
+        <td>
+          <a href="#" [routerLink]="['/keyword/', item.id]">{{ item.keyword }}</a>
+        </td>
+
+        <td>{{ item.totalAdWords | number }}</td>
+
+        <td>
+          {{ item.totalLinks | number }}
+        </td>
+
+        <td>
+          <span *ngIf="item.totalResults">
+            Abouts {{ item.totalResults | number }} results ({{ item.totalResultSeconds}} seconds)
+          </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <ngb-pagination
+      class="d-flex justify-content-end"
+      (pageChange)="pageChange($event)"
+      [rotate]="true"
+      [pageSize]="pageSize"
+      [collectionSize]="collectionSize"
+      [(page)]="page">
+    </ngb-pagination>
+  </div>
+</div>

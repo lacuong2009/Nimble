@@ -12,7 +12,7 @@ export class BaseClient {
   public constructor(public http: HttpClient) {
   }
 
-  public get<T>(endPoint: string, options : any): Observable<T> {
+  public get<T>(endPoint: string, options? : any): Observable<T> {
     return this.http.get<T>(this.api + endPoint, this.mergeHeaderOptions(options));
   }
 
