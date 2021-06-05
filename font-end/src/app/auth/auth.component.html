@@ -1,29 +1,35 @@
 <div class="container">
-  <form class="login-page animate modal-content" novalidate>
+  <form class="login-page animate modal-content" novalidate [formGroup]="form">
     <div class="imgcontainer">
       <img src="../../assets/img_avatar2.png" alt="Avatar" class="avatar">
     </div>
 
     <div class="container">
-      <label for="username"><b>Username:</b></label>
-      <input type="text"
-             placeholder="Enter Username"
-             id="username"
-             name="username"
-             required
-             [(ngModel)]="model.username">
+      <div class="row g-3">
+        <div class="col-md-12">
+          <label for="username" class="form-label required"><b>Username:</b></label>
+          <input type="text"
+                 id="username"
+                 name="username"
+                 required
+                 formControlName="username"
+                 [(ngModel)]="model.username">
+        </div>
 
-      <label for="password"><b>Password: </b></label>
-      <input type="password"
-             placeholder="Enter Password"
-             id="password"
-             name="password"
-             required
-             [(ngModel)]="model.password">
+        <div class="col-md-12">
+          <label for="password" class="form-label required"><b>Password:</b></label>
+          <input type="text"
+                 id="password"
+                 name="password"
+                 required
+                 formControlName="password"
+                 [(ngModel)]="model.password">
+        </div>
+      </div>
 
       <div class="clearfix">
         <button type="button" class="signupbtn" [routerLink]="'/register'">Sign Up</button>
-        <button type="button" class="signinbtn" (click)="onSubmit()">Sign In</button>
+        <button type="submit" class="signinbtn" (click)="onSubmit()">Sign In</button>
       </div>
     </div>
 

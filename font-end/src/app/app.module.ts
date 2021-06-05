@@ -6,12 +6,13 @@ import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { KeywordComponent } from './keyword/keyword.component';
 import { RegisterComponent } from './register/register.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MainLayoutComponent} from "./shared/layouts/main-layout.component";
 import {CommonModule} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,9 +29,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
-    })
+    }),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

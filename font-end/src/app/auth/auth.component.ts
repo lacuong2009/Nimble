@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "./auth.service";
 import {ToastrService} from "ngx-toastr";
-import {FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-auth',
@@ -12,7 +12,7 @@ import {FormGroup} from "@angular/forms";
 export class AuthComponent implements OnInit {
   public model: any = {};
   public submitted: boolean = false;
-  public form: FormGroup = new FormGroup({});
+  public form: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,10 +24,25 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.form = new FormGroup({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    });
   }
 
   public onSubmit() {
+    if (!this.form.valid) {
+      if (!this.model.username) {
+        this.toastr.warning('Username is required', 'WARN');
+      }
+
+      if (!this.model.password) {
+        this.toastr.warning('Password is required', 'WARN');
+      }
+
+      return;
+    }
+
     this.submitted = true;
     this.authService
       .auth(this.model.username, this.model.password)
