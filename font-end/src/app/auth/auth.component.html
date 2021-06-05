@@ -1,0 +1,37 @@
+<div class="container">
+  <form class="login-page animate modal-content" novalidate [formGroup]="form">
+    <div class="imgcontainer">
+      <img src="../../assets/img_avatar2.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-md-12">
+          <label for="username" class="form-label required"><b>Username:</b></label>
+          <input type="text"
+                 id="username"
+                 name="username"
+                 required
+                 formControlName="username"
+                 [(ngModel)]="model.username">
+        </div>
+
+        <div class="col-md-12">
+          <label for="password" class="form-label required"><b>Password:</b></label>
+          <input type="text"
+                 id="password"
+                 name="password"
+                 required
+                 formControlName="password"
+                 [(ngModel)]="model.password">
+        </div>
+      </div>
+
+      <div class="clearfix">
+        <button type="button" class="signupbtn" [routerLink]="'/register'">Sign Up</button>
+        <button type="submit" class="signinbtn" (click)="onSubmit()">Sign In</button>
+      </div>
+    </div>
+
+  </form>
+</div>
