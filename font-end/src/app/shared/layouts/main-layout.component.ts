@@ -32,11 +32,11 @@ export class MainLayoutComponent implements OnInit {
 
   public setActiveItem(url: string)
   {
-    if (url.indexOf('keyword')) {
+    if (url.indexOf('keyword') != -1) {
       this.active = 'keyword';
-    } else if (url.indexOf('register')) {
+    } else if (url.indexOf('register') != -1) {
       this.active = 'register';
-    } else if (url.indexOf('profile')) {
+    } else if (url.indexOf('profile') != -1) {
       this.active = 'profile';
     }
   }
