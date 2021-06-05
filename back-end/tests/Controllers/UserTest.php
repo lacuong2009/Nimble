@@ -6,16 +6,6 @@
 class UserTest extends TestCase
 {
     /**
-     * @var string
-     */
-    private $username;
-
-    /**
-     * @var string
-     */
-    private $password;
-
-    /**
      * UserTest constructor.
      * @param null $name
      * @param array $data
@@ -24,10 +14,6 @@ class UserTest extends TestCase
     public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-
-        $faker = Faker\Factory::create();
-        $this->password = $faker->password(6);
-        $this->username = $faker->email;
     }
 
     /**
@@ -70,7 +56,7 @@ class UserTest extends TestCase
      */
     public function testGetUserInfo()
     {
-        $this->get('api/users/a@a.se' , $this->defaultHeaders())
+        $this->get('api/users/me' , $this->defaultHeaders())
             ->receiveJson()
             ->assertResponseOk();
 
