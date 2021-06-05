@@ -62,5 +62,11 @@ export class KeywordComponent implements OnInit, AfterViewInit {
   {
     const modalRef = this.modalService.open(KeywordUploadComponent);
     modalRef.componentInstance.name = 'Upload';
+
+    modalRef.result.then((modalData) => {
+      if (modalData === 'succeeded') {
+        this.search(this.strKeyword);
+      }
+    });
   }
 }

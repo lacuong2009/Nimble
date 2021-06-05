@@ -28,7 +28,7 @@ export class KeywordUploadComponent implements OnInit, AfterViewInit{
     this.keywordService.postFile(this.formData).subscribe(
       (response: any) => {
         this.toastr.success('Import successfully', 'SUCCESS');
-        this.activeModal.close();
+        this.activeModal.close('succeeded');
       },
       (error: any) => {
         this.toastr.error('Import failed', 'ERROR');
