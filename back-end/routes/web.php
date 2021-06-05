@@ -39,6 +39,7 @@ $router->group([
 ], function () use ($router) {
     // User
     $router->get('/users/{username}','UsersController@show');
+    $router->get('/users/me','UsersController@me');
 
     // keywords
     $router->get('/keywords','KeywordController@search');

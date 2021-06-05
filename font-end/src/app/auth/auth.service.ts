@@ -28,4 +28,8 @@ export class AuthService {
   public logout() {
     return sessionStorage.clear();
   }
+
+  public getMeDetails() {
+    return this.client.get('/api/users/me');
+  }
 }

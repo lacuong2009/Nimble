@@ -76,7 +76,7 @@ class KeywordRepository extends EntityRepository
         }
 
         $query
-            ->orderBy('k.created', 'desc')
+            ->orderBy('k.id', 'desc')
             ->setMaxResults($limit)
             ->setFirstResult($offset);
 

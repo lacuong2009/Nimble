@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\User;
+use App\Helpers\UserHelper;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -46,5 +47,16 @@ class UsersController extends Controller
     public function show($username)
     {
         return $this->response($this->service->show($username));
+    }
+
+    /**
+     * @param Request $request
+     * @return \App\Common\Response\ApiResponse
+     */
+    public function me(Request $request)
+    {
+        $data = $request->user();
+
+        return $this->response(UserHelper::makeModelUser($data));
     }
 }

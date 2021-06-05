@@ -8,6 +8,7 @@ import {
   AuthGuardService as AuthGuard
 } from "./auth/auth.guard.service";
 import {KeywordDetailComponent} from "./keyword/details/keyword.detail.component";
+import {ProfileComponent} from "./auth/profile/profile.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: '', component: KeywordComponent },
       { path: 'keyword', component: KeywordComponent },
       { path: 'keyword/:id', component: KeywordDetailComponent },
+      { path: 'profile', component: ProfileComponent },
     ],
     canActivate: [AuthGuard]
   },

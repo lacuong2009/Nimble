@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {TokenInterceptor} from "./auth/token.interceptor";
 import {KeywordDetailComponent} from "./keyword/details/keyword.detail.component";
 import {KeywordUploadComponent} from "./keyword/upload/keyword.upload.component";
+import {ProfileComponent} from "./auth/profile/profile.component";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {KeywordUploadComponent} from "./keyword/upload/keyword.upload.component"
     RegisterComponent,
     MainLayoutComponent,
     KeywordDetailComponent,
-    KeywordUploadComponent
+    KeywordUploadComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
