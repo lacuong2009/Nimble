@@ -14,7 +14,7 @@ class CreateQueueKeywordTable extends Migration
     public function up()
     {
         Schema::create('queue_keyword', function (Blueprint $table) {
-            $table->integer('id')->primary('queue_keyword_pkey');
+            $table->bigincrements('id');
             $table->integer('keyword_id')->nullable()->index('idx_b811ea05115d4552');
             $table->timestamp('created')->nullable();
             $table->timestamp('updated')->nullable();

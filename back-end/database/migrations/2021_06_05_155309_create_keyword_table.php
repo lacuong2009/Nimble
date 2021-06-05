@@ -14,7 +14,7 @@ class CreateKeywordTable extends Migration
     public function up()
     {
         Schema::create('keyword', function (Blueprint $table) {
-            $table->integer('id')->primary('keyword_pkey');
+            $table->bigincrements('id');
             $table->string('keyword')->nullable();
             $table->integer('total_ad_words')->nullable();
             $table->integer('total_links')->nullable();
