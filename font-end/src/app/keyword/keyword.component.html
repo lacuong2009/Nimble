@@ -1,1 +1,60 @@
-<p>keyword works!</p>
+<div class="container-fluid">
+  <div class="">
+    <h3>Keyword Management</h3>
+
+    <div class="row float-right">
+        <form (submit)="search(strKeyword)" novalidate>
+          <div class="input-group mb-3">
+            <input type="text" name="search-keyword" class="form-control" placeholder="Search keyword" [(ngModel)]="strKeyword">
+
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" (click)="search(strKeyword)">Search</button>
+            </div>
+          </div>
+        </form>
+    </div>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Keyword</th>
+        <th scope="col">Total Ads</th>
+        <th scope="col">Total links</th>
+        <th scope="col">Results</th>
+      </tr>
+      </thead>
+      <tbody *ngIf="isAvailable()">
+      <tr *ngFor="let item of items">
+        <th scope="row">
+          {{ item.id }}
+        </th>
+        <td>
+          <a href="#" [routerLink]="['/keyword/', item.id]">{{ item.keyword }}</a>
+        </td>
+
+        <td>{{ item.totalAdWords | number }}</td>
+
+        <td>
+          {{ item.totalLinks | number }}
+        </td>
+
+        <td>
+          <span *ngIf="item.totalResults">
+            Abouts {{ item.totalResults | number }} results ({{ item.totalResultSeconds}} seconds)
+          </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <ngb-pagination
+      class="d-flex justify-content-end"
+      (pageChange)="pageChange($event)"
+      [rotate]="true"
+      [pageSize]="pageSize"
+      [collectionSize]="collectionSize"
+      [(page)]="page">
+    </ngb-pagination>
+  </div>
+</div>

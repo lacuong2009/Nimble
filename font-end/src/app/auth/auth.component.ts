@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "./auth.service";
 import {ToastrService} from "ngx-toastr";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthGuardService} from "./auth.guard.service";
 
 @Component({
   selector: 'app-auth',
@@ -18,12 +19,17 @@ export class AuthComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
+    private guardService: AuthGuardService,
     private toastr: ToastrService
   ) {
 
   }
 
   ngOnInit(): void {
+    if (this.guardService.isAuthenticated()) {
+      this.router.navigate(['/']);
+    }
+
     this.form = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)

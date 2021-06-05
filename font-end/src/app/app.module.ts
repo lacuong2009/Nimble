@@ -9,10 +9,12 @@ import { RegisterComponent } from './register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MainLayoutComponent} from "./shared/layouts/main-layout.component";
 import {CommonModule} from "@angular/common";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {TokenInterceptor} from "./auth/token.interceptor";
+import {KeywordDetailComponent} from "./keyword/details/keyword.detail.component";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AuthComponent,
     KeywordComponent,
     RegisterComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    KeywordDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     }),
     NgbModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
