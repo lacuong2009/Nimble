@@ -51,6 +51,7 @@ services:
     volumes:
       - ./back-end:/app
       - ./back-end/config/supervisor/:/etc/supervisor/conf.d/
+      - ./.docker/crontabs:/cron/bin
     dns:
       - 8.8.8.8
     restart: always
