@@ -1,5 +1,4 @@
-# Cuong Ly
-Nimble Challenge - Technical Test
+# Nimble Challenge - Technical Test
 
 ## Web application
 http://54.254.158.175/
@@ -93,3 +92,8 @@ http://54.254.158.175/
               ```json
                 {"success":true,"code":200,"data": {}}
               ```
+           
+# Author
+    Cuong Ly
+    anhcuongone@gmail.com
+    
