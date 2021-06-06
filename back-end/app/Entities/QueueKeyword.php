@@ -9,7 +9,7 @@ namespace App\Entities;
  * @Doctrine\ORM\Mapping\Table(name="`queue_keyword`")
  * @Doctrine\ORM\Mapping\HasLifecycleCallbacks
  */
-class QueueKeyWord extends BaseEntity
+class QueueKeyword extends BaseEntity
 {
     /**
      * @Doctrine\ORM\Mapping\Id

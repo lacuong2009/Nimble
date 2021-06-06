@@ -50,7 +50,7 @@ class Keyword extends BaseEntity
     protected $html;
 
     /**
-     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="\App\Entities\QueueKeyWord", mappedBy="Keyword", cascade={"remove"})
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="QueueKeyword", mappedBy="Keyword", cascade={"remove"})
      **/
     protected $Queue;
 }

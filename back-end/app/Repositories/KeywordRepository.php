@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Entities\Keyword;
-use App\Entities\QueueKeyWord;
+use App\Entities\QueueKeyword;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -43,12 +43,13 @@ class KeywordRepository extends EntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $query = $qb->select('q')
-            ->from(QueueKeyWord::class, 'q')
+            ->from(QueueKeyword::class, 'q')
             ->where(
                 $qb->expr()->lte('q.created', ':created')
             )
             ->setParameter('created', $date->toIso8601String())
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+            ->orderBy('q.id', 'asc');
 
         return $query->getQuery()->getResult();
     }

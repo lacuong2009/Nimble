@@ -4,7 +4,7 @@
 namespace App\Services;
 
 use App\Entities\Keyword;
-use App\Entities\QueueKeyWord;
+use App\Entities\QueueKeyword;
 use App\Exceptions\NotFoundException;
 
 /**
@@ -20,7 +20,7 @@ class QueueService extends BaseService
      */
     public function push(Keyword $keyword)
     {
-        $queue = new QueueKeyWord();
+        $queue = new QueueKeyword();
         $queue->keyword = $keyword;
 
         $this->getEntityManager()->persist($queue);
@@ -34,7 +34,7 @@ class QueueService extends BaseService
      */
     public function pop($id)
     {
-        $queue = $this->getRepository(QueueKeyWord::class)->find($id);
+        $queue = $this->getRepository(QueueKeyword::class)->find($id);
 
         if (empty($queue)) {
             throw new NotFoundException('Queue not found');
