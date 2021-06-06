@@ -74,15 +74,15 @@ class KeywordService extends BaseService
             $this->getEntityManager()->persist($entity);
             $this->getEntityManager()->flush($entity);
 
-//            if ($this->isFullQuota()) {
-//                // fire job, Use queue db
-//                dispatch(new CrawlerJob(Keyword::class, $entity->id));
-//            } else {
-//                // store queue to db
-//                /** @var QueueService $queue */
-//                $queue = app('QueueService');
-//                $queue->push($entity);
-//            }
+            if ($this->isFullQuota()) {
+                // fire job, Use queue db
+                dispatch(new CrawlerJob(Keyword::class, $entity->id));
+            } else {
+                // store queue to db
+                /** @var QueueService $queue */
+                $queue = app('QueueService');
+                $queue->push($entity);
+            }
         }
 
         return $entity;
