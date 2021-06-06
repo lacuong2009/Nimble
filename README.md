@@ -1,4 +1,4 @@
-# Nimble
+# Cuong Ly
 Nimble Challenge - Technical Test
 
 ## Web application
@@ -75,7 +75,7 @@ http://54.254.158.175/
              ```
       - Upload file .csv
         + Url: /api/keywords
-        + Method: GET
+        + Method: POST
         + Body:
           + File: choose file
         + Headers:
