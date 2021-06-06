@@ -27,6 +27,35 @@ class KeywordController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *     path="/api/keywords/file-upload",
+     *     tags={"Keywords"},
+     *     description="Upload file",
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                      property="File",
+     *                      type="sting",
+     *                      format="binary"
+     *                  )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="201",
+     *          description="User",
+     *          @OA\JsonContent(
+     *                  type="object",
+     *                  @OA\Property(
+     *                      property="success",
+     *                      type="boolean"
+     *                  )
+     *          )
+     *     )
+     * )
      * @param Request $request
      * @return bool[]
      * @throws InvalidArgumentException
@@ -50,6 +79,69 @@ class KeywordController extends Controller
     }
 
     /**
+     *  @OA\Get(
+     *     path="/api/keywords",
+     *     description="Get keywords list",
+     *     tags={"Keywords"},
+     *     @OA\Parameter(
+     *          name="page",
+     *          in="query"
+     *     ),
+     *     @OA\Parameter(
+     *          name="limit",
+     *          in="query"
+     *     ),
+     *     @OA\Parameter(
+     *          name="keyword",
+     *          in="query",
+     *          required=false
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Keyword",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(
+     *                      @OA\Property(
+     *                          property="data",
+     *                          type="array",
+     *                          @OA\Items(ref="#/components/schemas/Keyword")
+     *                      ),
+     *                      @OA\Property(
+     *                          property="total",
+     *                          type="integer"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="page",
+     *                          type="integer"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="limit",
+     *                          type="integer"
+     *                      ),
+     *                  )
+     *              )
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Not found",
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *      security={
+     *       {"bearer_token": {}}
+     *     }
+     * )
      * @param Request $request
      * @return \App\Common\Response\ApiResponse
      */
@@ -63,6 +155,45 @@ class KeywordController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *     path="/api/keywords/{id}",
+     *     description="Get keyword",
+     *     tags={"Keywords"},
+     *     @OA\Parameter(
+     *          name="id",
+     *          in="path",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="Keyword",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Keyword"
+     *              )
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Not found",
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *      security={
+     *       {"bearer_token": {}}
+     *     }
+     * )
      * @param $id
      * @return \App\Common\Response\ApiResponse
      * @throws \App\Exceptions\NotFoundException
