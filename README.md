@@ -1,6 +1,9 @@
 # Nimble
 Nimble Challenge - Technical Test
 
+## Web application
+http://54.254.158.175/
+
 ## Requirements
    - Docker version 20.10.5
    - docker-compose version 1.28.5
@@ -85,8 +88,7 @@ Nimble Challenge - Technical Test
               ```json
                 {"success":true,"code":200,"data": {}}
               ```
-## Web application
-   1. http://54.254.158.175/
+
 
 
 
