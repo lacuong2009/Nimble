@@ -38,7 +38,7 @@ export class KeywordComponent implements OnInit, AfterViewInit {
 
   public search(keyword?: string)
   {
-    this.keywordService.search(keyword, this.page, this.pageSize).subscribe(
+    this.keywordService.search(keyword?.trim(), this.page, this.pageSize).subscribe(
       (response: any) => {
         let data = response.data;
         this.items = data.items;
