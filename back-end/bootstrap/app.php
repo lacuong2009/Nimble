@@ -110,6 +110,7 @@ $app->register(LaravelDoctrine\ORM\DoctrineServiceProvider::class);
 $app->register(\Laravel\Passport\PassportServiceProvider::class);
 
 if (env('APP_ENV') == 'local') {
+    $app->register(\SwaggerLume\ServiceProvider::class);
     $app->register(\KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider::class);
 }
 /*

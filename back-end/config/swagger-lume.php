@@ -17,7 +17,7 @@ return [
     'multipleDocs' => [
         /*
        |--------------------------------------------------------------------------
-       | Example 'urls' => [['url' => 'http://localhost/guarantee-api/docs', 'name' => 'Guarantee API']]
+       | Example 'urls' => [['url' => 'http://localhost/docs', 'name' => 'Guarantee API']]
        |--------------------------------------------------------------------------
         */
         'urls' => []

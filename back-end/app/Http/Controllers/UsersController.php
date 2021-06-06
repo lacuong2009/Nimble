@@ -29,6 +29,35 @@ class UsersController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *     path="/oauth/register",
+     *     tags={"User"},
+     *     description="Register user",
+     *     @OA\RequestBody(
+     *          description="Input data format",
+     *          @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 ref="#/components/schemas/User"
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="201",
+     *          description="User",
+     *          @OA\JsonContent(
+     *                  type="object",
+     *                  @OA\Property(
+     *                      property="success",
+     *                      type="boolean"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="data",
+     *                      ref="#/components/schemas/User"
+     *                  )
+     *          )
+     *     )
+     * )
      * @param Request $request
      * @return \App\Common\Response\ApiResponse
      * @throws \Doctrine\ORM\ORMException
@@ -41,6 +70,47 @@ class UsersController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *     path="/api/users/{username}",
+     *     description="Get user",
+     *     tags={"User"},
+     *     @OA\Parameter(
+     *          name="username",
+     *          in="path",
+     *          required=true,
+     *          description="Username",
+     *          @OA\Schema(
+     *              type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="200",
+     *          description="User",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/User"
+     *              )
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Not found",
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *      security={
+     *       {"bearer_token": {}}
+     *     }
+     * )
+     *
      * @param $username
      * @return \App\Common\Response\ApiResponse
      */
@@ -50,6 +120,38 @@ class UsersController extends Controller
     }
 
     /**
+     * @OA\Get(
+     *     path="/api/users/me",
+     *     description="Get user",
+     *     tags={"User"},
+     *     @OA\Response(
+     *          response="200",
+     *          description="User",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/User"
+     *              )
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Not found",
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized",
+     *     ),
+     *      security={
+     *       {"bearer_token": {}}
+     *     }
+     * )
+     *
      * @param Request $request
      * @return \App\Common\Response\ApiResponse
      */

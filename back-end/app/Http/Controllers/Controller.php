@@ -6,6 +6,30 @@ use App\Common\Response\ApiResponse;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
+/**
+ * Class Controller
+ * @package App\Http\Controllers
+ *
+ * @OA\Info(
+ *     title="APIs",
+ *     version="1.0.0",
+ *     description="L5 Swagger OpenApi description"
+ * )
+ *
+ * @OA\Get(
+ *     path="/",
+ *     tags={"Version"},
+ *     description="Version",
+ *     @OA\Response(response="200", description="Laravel version")
+ * )
+ *
+ * @OA\SecurityScheme(
+ *   securityScheme="bearer_token",
+ *   type="apiKey",
+ *   in="header",
+ *   name="Authorization"
+ * )
+ */
 class Controller extends BaseController
 {
     /**

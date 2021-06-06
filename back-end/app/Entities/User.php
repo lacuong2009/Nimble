@@ -13,48 +13,48 @@ use LaravelDoctrine\ORM\Auth\Authenticatable;
 /**
  * Class User
  * @package App\Entities
- * @\Doctrine\ORM\Mapping\Entity(repositoryClass="\App\Repositories\UserRepository")
- * @\Doctrine\ORM\Mapping\Table(name="`user`")
- * @\Doctrine\ORM\Mapping\HasLifecycleCallbacks
+ * @Doctrine\ORM\Mapping\Entity(repositoryClass="\App\Repositories\UserRepository")
+ * @Doctrine\ORM\Mapping\Table(name="`user`")
+ * @Doctrine\ORM\Mapping\HasLifecycleCallbacks
  */
 class User extends BaseEntity implements AuthenticatableContract, CanResetPasswordContract
 {
     use CanResetPassword, HasApiTokens, Authenticatable;
 
     /**
-     * @\Doctrine\ORM\Mapping\Id
-     * @\Doctrine\ORM\Mapping\GeneratedValue(strategy="AUTO")
-     * @\Doctrine\ORM\Mapping\Column(type="integer")
+     * @Doctrine\ORM\Mapping\Id
+     * @Doctrine\ORM\Mapping\GeneratedValue(strategy="AUTO")
+     * @Doctrine\ORM\Mapping\Column(type="integer")
      */
     protected $id;
 
     /**
-     * @\Doctrine\ORM\Mapping\Column(type="string")
+     * @Doctrine\ORM\Mapping\Column(type="string")
      */
     protected $password;
 
     /**
-     * @\Doctrine\ORM\Mapping\Column(type="string", nullable=true)
+     * @Doctrine\ORM\Mapping\Column(type="string", nullable=true)
      */
     protected $username;
 
     /**
-     * @\Doctrine\ORM\Mapping\Column(type="boolean")
+     * @Doctrine\ORM\Mapping\Column(type="boolean")
      */
     protected $status;
 
     /**
-     * @\Doctrine\ORM\Mapping\Column(type="string")
+     * @Doctrine\ORM\Mapping\Column(type="string")
      */
     protected $fullName;
 
     /**
-     * @\Doctrine\ORM\Mapping\Column(type="string")
+     * @Doctrine\ORM\Mapping\Column(type="string")
      */
     protected $email;
 
     /**
-     * @\Doctrine\ORM\Mapping\Column(type="string", nullable=true)
+     * @Doctrine\ORM\Mapping\Column(type="string", nullable=true)
      */
     protected $rememberToken;
 
