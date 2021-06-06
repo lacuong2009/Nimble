@@ -18,7 +18,7 @@ class CreateKeywordTable extends Migration
             $table->string('keyword')->nullable();
             $table->integer('total_ad_words')->nullable();
             $table->integer('total_links')->nullable();
-            $table->integer('total_results')->nullable();
+            $table->bigInteger('total_results')->nullable();
             $table->float('total_result_seconds')->nullable();
             $table->text('html')->nullable();
             $table->timestamp('created')->nullable();

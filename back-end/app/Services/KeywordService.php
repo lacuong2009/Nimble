@@ -66,26 +66,35 @@ class KeywordService extends BaseService
      */
     public function store($keyword) : Keyword
     {
-        $entity = $this->getRepository(Keyword::class)->findOneBy(['keyword' => $keyword]);
+        $connection = $this->getEntityManager()->getConnection();
 
-        if (empty($entity)) {
-            $entity = new Keyword();
-            $entity->keyword = trim($keyword);
-            $this->getEntityManager()->persist($entity);
-            $this->getEntityManager()->flush($entity);
+        try {
+            $connection->beginTransaction();
+            $entity = $this->getRepository(Keyword::class)->findOneBy(['keyword' => $keyword]);
 
-            if ($this->isFullQuota()) {
-                // fire job, Use queue db
-                dispatch(new CrawlerJob(Keyword::class, $entity->id));
-            } else {
-                // store queue to db
-                /** @var QueueService $queue */
-                $queue = app('QueueService');
-                $queue->push($entity);
+            if (empty($entity)) {
+                $entity = new Keyword();
+                $entity->keyword = trim($keyword);
+                $this->getEntityManager()->persist($entity);
+                $this->getEntityManager()->flush($entity);
+
+                if (! $this->isFullQuota()) {
+                    // fire job, Use queue db
+                    dispatch(new CrawlerJob(Keyword::class, $entity->id));
+                } else {
+                    // store queue to db
+                    /** @var QueueService $queue */
+                    $queue = app('QueueService');
+                    $queue->push($entity);
+                }
             }
-        }
 
-        return $entity;
+            $connection->commit();
+            return $entity;
+        } catch (\Exception $ex) {
+            $connection->rollBack();
+            throw $ex;
+        }
     }
 
     /**
@@ -95,14 +104,14 @@ class KeywordService extends BaseService
     public function isFullQuota() : bool
     {
         $quota = env('QUOTA_LIMIT_PER_DAY') ?? 100;
-        return $quota >= $this->getNumberImportToday();
+        return $quota <= $this->getNumberImportToday();
     }
 
     /**
      * @return int|mixed|string|null
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getNumberImportToday() : bool
+    public function getNumberImportToday() : int
     {
         /** @var KeywordRepository $repos */
         $repos = $this->getRepository(Keyword::class);

@@ -35,7 +35,7 @@ class Keyword extends BaseEntity
     protected $totalLinks;
 
     /**
-     * @Doctrine\ORM\Mapping\Column(type="integer", nullable=true)
+     * @Doctrine\ORM\Mapping\Column(type="bigint", nullable=true)
      */
     protected $totalResults;
 
