@@ -10,13 +10,18 @@ http://54.254.158.175/
    - NPM version 6
    - Angular CLI
 
-## Setup environment
-   1. Back-end
+## Setup environment Local
+   1. Back-end (Lumen framework)
       - Open terminal back-end directory
       - Run composer install
       - Instalment docker composer
       - Run `docker-composer up -d`
-   2. Front-end
+      - Create database and update environment (.env file)
+      - Open docker container `docker exec -it php-fpm bash`
+      - Open work dir at `/app`
+      - Run `php artisan migrate`
+      - Run `php artisan passport:install` to insert Oauth client_id, client_secret
+   2. Front-end (Angular framework)
       - Open terminal front-end directory
       - Run `npm run start`
 
@@ -88,7 +93,3 @@ http://54.254.158.175/
               ```json
                 {"success":true,"code":200,"data": {}}
               ```
-
-
-
-
