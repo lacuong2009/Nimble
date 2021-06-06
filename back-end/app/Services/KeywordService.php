@@ -64,7 +64,7 @@ class KeywordService extends BaseService
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    private function store($keyword) : Keyword
+    public function store($keyword) : Keyword
     {
         $entity = $this->getRepository(Keyword::class)->findOneBy(['keyword' => $keyword]);
 

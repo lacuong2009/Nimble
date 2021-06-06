@@ -27,13 +27,38 @@ class KeywordServiceTest extends TestCase
         $this->assertIsBool($data);
     }
 
-    public function testSearch()
+    public function testSearchAll()
     {
         /** @var \App\Services\KeywordService $service */
         $service = app('KeywordService');
         $data = $service->search([], 1, 10);
 
         $this->assertNotEmpty($data);
+        $this->assertNotEmpty($data['items']);
+        $this->assertNotEmpty($data['total']);
+        $this->assertGreaterThan(0, count($data['items']));
+    }
+
+    public function testSearchKeyword()
+    {
+        /** @var \App\Services\KeywordService $service */
+        $service = app('KeywordService');
+        $data = $service->search(['keyword' => 'lego'], 1, 10); // this keyword already existed in database
+
+        $this->assertNotEmpty($data);
+        $this->assertNotEmpty($data['items']);
+        $this->assertNotEmpty($data['total']);
+    }
+
+    public function testSearchKeywordNotFound()
+    {
+        /** @var \App\Services\KeywordService $service */
+        $service = app('KeywordService');
+        $data = $service->search(['keyword' => 'anonymous'], 1, 10);
+
+        $this->assertNotEmpty($data);
+        $this->assertEquals(0, $data['total']);
+        $this->assertEquals(0, count($data['items']));
     }
 
     public function testShow()
@@ -47,6 +72,7 @@ class KeywordServiceTest extends TestCase
 
     public function testShowNotFound()
     {
+        $this->expectException(\App\Exceptions\NotFoundException::class);
         /** @var \App\Services\KeywordService $service */
         $service = app('KeywordService');
 
@@ -54,6 +80,31 @@ class KeywordServiceTest extends TestCase
             $data = $service->show(-1);
         } catch (\Exception $exception) {
             $this->assertSame('Not found Keyword', $exception->getMessage());
+            throw $exception;
         }
     }
+
+    public function testStore()
+    {
+        /** @var \App\Services\KeywordService $service */
+        $service = app('KeywordService');
+        $keyword = 'test keyword';
+        $data = $service->store($keyword);
+        $this->assertSame($keyword, $data->keyword);
+    }
+
+    public function testStoreDuplicated()
+    {
+        /** @var \App\Services\KeywordService $service */
+        $service = app('KeywordService');
+        $keyword = 'lego'; // assume this keyword already existed in database
+        $data = $service->store($keyword);
+        $this->assertSame($keyword, $data->keyword);
+        $this->assertLessThan(
+            strtotime(\Carbon\Carbon::now()->toIso8601String()),
+            strtotime(\Carbon\Carbon::parse($data->created)->toIso8601String())
+        );
+    }
+
+
 }
