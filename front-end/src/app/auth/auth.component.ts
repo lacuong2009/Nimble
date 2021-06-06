@@ -22,18 +22,16 @@ export class AuthComponent implements OnInit {
     private guardService: AuthGuardService,
     private toastr: ToastrService
   ) {
-
+    this.form = new FormGroup({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    });
   }
 
   ngOnInit(): void {
     if (this.guardService.isAuthenticated()) {
       this.router.navigate(['/']);
     }
-
-    this.form = new FormGroup({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required)
-    });
   }
 
   public onSubmit() {
