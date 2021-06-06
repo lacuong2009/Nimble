@@ -71,7 +71,7 @@ Nimble Challenge - Technical Test
         + Body:
           + File: choose file
         + Headers:
-            + Authorization : Bearer token
+          + Authorization : Bearer token
         + Response:
            ```json
            {"success":true}
@@ -80,7 +80,7 @@ Nimble Challenge - Technical Test
          + Url: /api/keywords/{id}
          + Method: GET
          + Headers:
-               + Authorization : Bearer token
+           + Authorization : Bearer token
          + Response:
               ```json
                 {"success":true,"code":200,"data": {}}
