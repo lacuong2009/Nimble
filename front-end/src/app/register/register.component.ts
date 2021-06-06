@@ -17,9 +17,7 @@ export class RegisterComponent implements OnInit {
   constructor( private route: ActivatedRoute,
                private router: Router,
                private registerService: RegisterService,
-               private toastr: ToastrService) { }
-
-  ngOnInit(): void {
+               private toastr: ToastrService) {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
       email: new FormControl('', [
@@ -29,6 +27,10 @@ export class RegisterComponent implements OnInit {
       password: new FormControl('', Validators.required),
       rpassword: new FormControl('', Validators.required)
     });
+  }
+
+  ngOnInit(): void {
+
   }
 
   public onSubmit() {

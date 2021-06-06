@@ -5,18 +5,18 @@ import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserDynamicTestingModule} from "@angular/platform-browser-dynamic/testing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {BrowserModule, By} from "@angular/platform-browser";
-import {KeywordComponent} from "./keyword.component";
+import {BrowserModule} from "@angular/platform-browser";
+import {RegisterComponent} from "./register.component";
 
-describe('KeywordComponent', () => {
-  let comp: KeywordComponent;
-  let fixture: ComponentFixture<KeywordComponent>;
+describe('AuthComponent', () => {
+  let comp: RegisterComponent;
+  let fixture: ComponentFixture<RegisterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        KeywordComponent
+        RegisterComponent
       ],
       imports: [
         HttpClientModule,
@@ -35,7 +35,7 @@ describe('KeywordComponent', () => {
             snapshot: {
               paramMap: {
                 get(): string {
-                  return '123';
+                  return '/register';
                 },
               },
             },
@@ -48,28 +48,34 @@ describe('KeywordComponent', () => {
       ]
     }).compileComponents().then(() => {
       // @ts-ignore
-      fixture = TestBed.createComponent(KeywordComponent);
+      const fixture = TestBed.createComponent(RegisterComponent);
       comp = fixture.componentInstance;
     });
   }));
 
-  it('should create the KeywordComponent', async(() => {
+  it('should create the RegisterComponent', async(() => {
     expect(comp).toBeTruthy();
   }));
 
-  it('should have a data table', async(() => {
-    let el = fixture.debugElement.query(By.css('table')).nativeElement;
-    expect(el).toBeTruthy();
+  it('should set submitted to false', async(() => {
+    expect(comp.submitted).toBeFalsy();
   }));
 
-  it('should call button refresh', async(() => {
-    let el = fixture.debugElement.query(By.css('button[name=refresh]')).nativeElement;
-    expect(el).toBeTruthy();
-    el.click();
+  it('form Register should be invalid', async(() => {
+    comp.form.controls['name'].setValue(null);
+    comp.form.controls['email'].setValue(null);
+    comp.form.controls['password'].setValue(null);
+    comp.form.controls['rpassword'].setValue(null);
+
+    expect(comp.form.valid).toBeFalsy();
   }));
 
-  it('should call button upload', async(() => {
-    let el = fixture.debugElement.query(By.css('button[name=upload]')).nativeElement;
-    expect(el).toBeTruthy();
+  it('form Register should be valid', async(() => {
+    comp.form.controls['name'].setValue('test');
+    comp.form.controls['email'].setValue('a@a.se');
+    comp.form.controls['password'].setValue('123123');
+    comp.form.controls['rpassword'].setValue('123123');
+
+    expect(comp.form.valid).toBeTruthy();
   }));
 });
