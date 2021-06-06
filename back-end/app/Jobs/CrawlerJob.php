@@ -68,7 +68,7 @@ class CrawlerJob extends Job
      * @param $items
      * @return int
      */
-    private function totalLinks($items)
+    public function totalLinks($items)
     {
         $total = 0;
         foreach ($items as $item) {
@@ -86,13 +86,12 @@ class CrawlerJob extends Job
     private function countLinks($item, &$total)
     {
         foreach ($item as $key => $value) {
-
             if (is_string($value) && $this->isUrl($value)) {
                 $total++;
             }
 
-            if (is_object($value)) {
-                $this->countLinks($value, $total);
+            if (!is_scalar($value)) {
+                $this->countLinks((array) $value, $total);
             }
         }
 
