@@ -1,6 +1,5 @@
 <?php
 
-
 class CrawlerJobTest extends TestCase
 {
     public function testTotalLinks()
@@ -34,5 +33,27 @@ class CrawlerJobTest extends TestCase
         $total = $job->totalLinks($items);
 
         $this->assertEquals(6, $total);
+    }
+
+    public function testHandle()
+    {
+
+        /** @var \App\Services\KeywordService $service */
+        $service = app('KeywordService');
+        $keyword = 'test keyword';
+        $data = $service->store($keyword);
+
+        $job = new \App\Jobs\CrawlerJob(\App\Entities\Keyword::class, $data->id);
+        $entity = $job->handle(new \App\Services\BaseService());
+
+        $this->assertNotEmpty($entity);
+    }
+
+    public function testHandleNULL()
+    {
+        $job = new \App\Jobs\CrawlerJob(\App\Entities\Keyword::class, -1);
+        $entity = $job->handle(new \App\Services\BaseService());
+
+        $this->assertEmpty($entity);
     }
 }

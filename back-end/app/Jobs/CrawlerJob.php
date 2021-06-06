@@ -31,9 +31,12 @@ class CrawlerJob extends Job
 
     /**
      * @param BaseService $service
+     * @return Keyword
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function handle(BaseService $service) : void
+    public function handle(BaseService $service)
     {
         /** @var Keyword $entity */
         $entity = $service->getRepository($this->entityName)->find($this->entityId);
@@ -43,6 +46,8 @@ class CrawlerJob extends Job
         }
 
         $service->getEntityManager()->flush();
+
+        return $entity;
     }
 
     /**
