@@ -32,6 +32,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // trigger at mid night.
+        /*
+         * At a first of day. This command will be triggered by crontabs.
+         * it read keywords and push back to queue and then collect info from google and store to db
+         */
         $schedule->command('schedule:keyword')->daily();
     }
 }

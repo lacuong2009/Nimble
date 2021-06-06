@@ -75,7 +75,7 @@ class KeywordService extends BaseService
             $this->getEntityManager()->flush($entity);
 
 //            if ($this->isFullQuota()) {
-//                // fire job
+//                // fire job, Use queue db
 //                dispatch(new CrawlerJob(Keyword::class, $entity->id));
 //            } else {
 //                // store queue to db
