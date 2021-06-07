@@ -315,10 +315,26 @@
   <section>
     <nav>
       <ul>
-        <li><a [class]="active == 'keyword' ? 'active' : ''" [routerLink]="'keyword'">Keyword</a></li>
-        <li><a [class]="active == 'register' ? 'active' : ''" [routerLink]="'register'">Register</a></li>
-        <li><a [class]="active == 'profile' ? 'active' : ''" [routerLink]="'profile'">Profile</a></li>
-        <li (click)="logout()"><a>Logout</a></li>
+        <li class="list-group-item">
+          <a [class]="active == 'keyword' ? 'active' : ''" [routerLink]="'keyword'">
+            <i class="fa fa-file-word-o" aria-hidden="true"></i> Keyword
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a [class]="active == 'register' ? 'active' : ''" [routerLink]="'register'">
+            <i class="fa fa-registered" aria-hidden="true"></i> Register
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a [class]="active == 'profile' ? 'active' : ''" [routerLink]="'profile'">
+            <i class="fa fa-user" aria-hidden="true"></i> Profile
+          </a>
+        </li>
+        <li class="list-group-item" (click)="logout()">
+          <a>
+            <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+          </a>
+        </li>
       </ul>
     </nav>
 

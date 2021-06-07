@@ -6,15 +6,22 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
           <li>
-            <button type="button" name="upload" class="btn btn-primary" (click)="uploadForm()">Upload (.csv)</button>
+            <button type="button" name="upload" class="btn btn-primary" (click)="uploadForm()">
+              <i class="fa fa-upload" aria-hidden="true"></i> Upload (.csv)
+            </button>
           </li>
           <li>
-            <button type="button" name="refresh" class="btn btn-primary ml-2" (click)="search(strKeyword)">Refresh</button>
+            <button type="button" name="refresh" class="btn btn-primary ml-2" (click)="search(strKeyword)">
+              <i class="fa fa-refresh" aria-hidden="true"></i> Refresh
+            </button>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" (submit)="search(strKeyword)" novalidate>
           <input name="search-keyword" class="form-control mr-sm-2" type="search" placeholder="Search keyword" [(ngModel)]="strKeyword">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            <i class="fa fa-search" aria-hidden="true"></i> Search
+          </button>
         </form>
       </div>
     </div>
