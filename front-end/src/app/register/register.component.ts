@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
       .register(this.model)
       .subscribe(
         (data: any) => {
-          this.toastr.success('Login successfully', 'SUCCESS');
+          this.toastr.success('Register successfully', 'SUCCESS');
           this.router.navigate(['/login'], {});
         },
         (error: any) => {
