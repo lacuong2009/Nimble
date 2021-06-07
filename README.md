@@ -26,7 +26,8 @@ http://54.254.158.175/
 
 ## Document APIs
    1. Swagger url
-      - http://localhost/api/documentation
+      - http://localhost/api/documentation 
+      - http://54.254.158.175/swagger/#/  (public)
    2. APIs 
       - Login 
         + Url: api/oauth/token
