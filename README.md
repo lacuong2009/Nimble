@@ -49,7 +49,7 @@ http://54.254.158.175/
           ```
         + Response:
           ```json
-            {"success":true,"code":201,"data": {}}
+            {"success":true,"code":201,"data": "#User"}
           ```
       - Get User
         + Url: api/users/me
@@ -58,7 +58,7 @@ http://54.254.158.175/
             + Authorization : Bearer token
         + Response:
           ```json
-            {"success":true,"code":200,"data": {}}
+            {"success":true,"code":200,"data": "#User"}
           ```
       - Get list keywords
         + Url: /api/keywords
@@ -71,7 +71,7 @@ http://54.254.158.175/
           + Authorization : Bearer token
         + Response:
              ```json
-               {"success":true,"code":200,"data": {}}
+               {"success":true,"code":200,"data": ["#/Keyword"]}
              ```
       - Upload file .csv
         + Url: /api/keywords
@@ -91,10 +91,17 @@ http://54.254.158.175/
            + Authorization : Bearer token
          + Response:
               ```json
-                {"success":true,"code":200,"data": {}}
+                {"success":true,"code":200,"data": "#/Keyword"}
               ```
-           
+   3. Models
+        - User:
+            ```json
+                {"id":0,"username":"string","status":true,"fullName":true,"email":"string","created":"string","updated":"string"}
+            ```
+        - Keyword: 
+            ```json
+                {"id":0,"keyword":"string","totalAdWords":0,"totalLinks":0,"totalResults":0,"totalResultSeconds":0,"html":"string"}
+            ```
 # Author
     Cuong Ly
     anhcuongone@gmail.com
-    
