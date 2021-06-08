@@ -8,6 +8,9 @@ http://54.254.158.175/
    - docker-compose version 1.28.5
    - NPM version 6
    - Angular CLI
+   - PostgreSQL
+   - PHP 7.2
+   - Angular 12.0
 
 ## A way resolve to limit quota search from Google
 The document says the limited quota is 100 request custom search per day. So If in a day If users upload keywords less than 100 then these keywords will be load results from google immediately. In case the User upload over quota. I will push keywords to the queue in the database and waiting until the next day and try to get results to search from Google.
