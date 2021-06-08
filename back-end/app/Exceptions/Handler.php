@@ -44,6 +44,10 @@ class Handler extends ExceptionHandler
             return new ExceptionResponse($exception, 404);
         }
 
+        if ($exception instanceof ValidationException) {
+            return new ExceptionResponse($exception, 422);
+        }
+
         if ($exception instanceof ClientException) {
             return new ExceptionResponse($exception, 422);
         }

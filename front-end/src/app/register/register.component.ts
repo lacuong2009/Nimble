@@ -58,6 +58,11 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    if (this.model.password.length < 6) {
+      this.toastr.warning('Password validation is at least 6 character', 'WARN');
+      return;
+    }
+
     if (this.model.password !== this.model.rpassword) {
       this.toastr.warning('Repeat password is not match', 'WARN');
       return;

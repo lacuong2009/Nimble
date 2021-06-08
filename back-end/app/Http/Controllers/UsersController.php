@@ -65,6 +65,12 @@ class UsersController extends Controller
      */
     public function register(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required|min:6',
+        ]);
+
         $params = $request->all();
         return $this->response($this->service->register($params));
     }
