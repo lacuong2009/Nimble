@@ -63,7 +63,7 @@ export class AuthComponent implements OnInit {
           if (error.error.code < 500) {
             this.toastr.error(error.error.message, 'ERROR');
           } else {
-            this.toastr.error('Login failed', 'ERROR');
+            this.toastr.error('Username or password invalid', 'ERROR');
           }
         },
       );

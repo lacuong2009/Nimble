@@ -163,7 +163,7 @@ class User extends BaseEntity implements AuthenticatableContract, CanResetPasswo
         $user = $em->getRepository(get_class($this))->findOneBy(['username' => $username]);
 
         if (empty($user)) {
-            throw new UnauthorizedException('Username not found', 401);
+            throw new NotFoundException('Username not found', 401);
         }
 
         if (!empty($user) && 0 === $user->status) {
