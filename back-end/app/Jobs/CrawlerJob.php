@@ -38,6 +38,8 @@ class CrawlerJob extends Job
      */
     public function handle(BaseService $service)
     {
+        $service->checkDatabaseConnection();
+
         /** @var Keyword $entity */
         $entity = $service->getRepository($this->entityName)->find($this->entityId);
 
