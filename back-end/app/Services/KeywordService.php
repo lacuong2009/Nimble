@@ -78,6 +78,10 @@ class KeywordService extends BaseService
                 $this->getEntityManager()->persist($entity);
                 $this->getEntityManager()->flush($entity);
 
+                /**
+                 * https://developers.google.com/custom-search/v1/overview
+                 * Resolve issue Limit quota google
+                 */
                 if (! $this->isFullQuota()) {
                     // fire job, Use queue db
                     dispatch(new CrawlerJob(Keyword::class, $entity->id));

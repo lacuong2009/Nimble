@@ -9,6 +9,11 @@ http://54.254.158.175/
    - NPM version 6
    - Angular CLI
 
+## A way resolve to limit quota search from Google
+The document says the limited quota is 100 request custom search per day. So If in a day If users upload keywords less than 100 then these keywords will be load results from google immediately. In case the User upload over quota. I will push keywords to the queue in the database and waiting until the next day and try to get results to search from Google.
+
+https://developers.google.com/custom-search/v1/overview
+
 ## Setup environment Local
    1. Back-end (Lumen framework)
       - Open terminal back-end directory
