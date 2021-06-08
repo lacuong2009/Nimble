@@ -2,6 +2,8 @@
 
 namespace App\Entities;
 
+use App\Exceptions\NotFoundException;
+use App\Exceptions\UnauthorizedException;
 use Doctrine\ORM\EntityManager;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -160,8 +162,12 @@ class User extends BaseEntity implements AuthenticatableContract, CanResetPasswo
         $em = app(EntityManager::class);
         $user = $em->getRepository(get_class($this))->findOneBy(['username' => $username]);
 
+        if (empty($user)) {
+            throw new UnauthorizedException('Username not found', 401);
+        }
+
         if (!empty($user) && 0 === $user->status) {
-            throw new OAuthServerException('Unauthorized', 1000, 'invalid_credentials', 401);
+            throw new UnauthorizedException('Unauthorized');
         }
 
         return $user;

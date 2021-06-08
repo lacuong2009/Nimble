@@ -60,7 +60,11 @@ export class AuthComponent implements OnInit {
           this.router.navigate(['/'], {queryParams: {'initAppAfterLogin': true}});
         },
         (error: any) => {
-          this.toastr.error('Login failed', 'ERROR');
+          if (error.error.code < 500) {
+            this.toastr.error(error.error.message, 'ERROR');
+          } else {
+            this.toastr.error('Login failed', 'ERROR');
+          }
         },
       );
   }

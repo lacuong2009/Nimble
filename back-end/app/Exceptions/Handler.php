@@ -40,6 +40,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof UnauthorizedException) {
+            return new ExceptionResponse($exception, 401);
+        }
+
         if ($exception instanceof NotFoundException) {
             return new ExceptionResponse($exception, 404);
         }
