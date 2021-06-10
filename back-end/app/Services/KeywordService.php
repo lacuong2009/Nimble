@@ -47,6 +47,7 @@ class KeywordService extends BaseService
     {
         $filePath = $path . $name;
         $adapter = new Adapter($filePath);
+        $currentUser = UserHelper::getUser();
 
         while ($row = $adapter->readRow()) {
             $keyword = reset($row);
@@ -55,23 +56,29 @@ class KeywordService extends BaseService
                 continue;
             }
 
-            $this->store($keyword);
+            $this->store($keyword, $currentUser);
         }
     }
 
     /**
      * @param $keyword
+     * @param $currentUser
      * @return Keyword
+     * @throws \Doctrine\DBAL\ConnectionException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function store($keyword) : Keyword
+    public function store($keyword, $currentUser) : Keyword
     {
         $connection = $this->getEntityManager()->getConnection();
 
         try {
             $connection->beginTransaction();
-            $entity = $this->getRepository(Keyword::class)->findOneBy(['keyword' => $keyword]);
+            $entity = $this->getRepository(Keyword::class)->findOneBy([
+                'keyword' => $keyword,
+                'user' => $currentUser
+            ]);
 
             if (empty($entity)) {
                 $entity = new Keyword();
