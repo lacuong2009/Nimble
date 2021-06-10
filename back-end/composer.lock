@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4885d86f340942104318b35e4067f7c1",
+    "content-hash": "a932685a25e5b2f7944661c6d0829635",
     "packages": [
         {
             "name": "brick/math",
@@ -1322,6 +1322,60 @@
                 }
             ],
             "time": "2020-12-29T14:50:06+00:00"
+        },
+        {
+            "name": "ezyang/htmlpurifier",
+            "version": "v4.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezyang/htmlpurifier.git",
+                "reference": "08e27c97e4c6ed02f37c5b2b20488046c8d90d75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/08e27c97e4c6ed02f37c5b2b20488046c8d90d75",
+                "reference": "08e27c97e4c6ed02f37c5b2b20488046c8d90d75",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "simpletest/simpletest": "dev-master#72de02a7b80c6bb8864ef9bf66d41d2f58f826bd"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ],
+                "exclude-from-classmap": [
+                    "/library/HTMLPurifier/Language/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ],
+            "support": {
+                "issues": "https://github.com/ezyang/htmlpurifier/issues",
+                "source": "https://github.com/ezyang/htmlpurifier/tree/master"
+            },
+            "time": "2020-06-29T00:56:53+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -3956,6 +4010,258 @@
                 "random"
             ],
             "time": "2020-10-15T08:29:30+00:00"
+        },
+        {
+            "name": "php-extended/php-html-interface",
+            "version": "3.1.22",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/php-extended/php-html-interface.git",
+                "reference": "38cf201fdb10ca6027cb46ff4ddeeff05b6b476e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/php-extended%2Fphp-html-interface/repository/archive.zip?sha=38cf201fdb10ca6027cb46ff4ddeeff05b6b476e",
+                "reference": "38cf201fdb10ca6027cb46ff4ddeeff05b6b476e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "php-extended/polyfill-php80-stringable": ">=1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpExtended\\Html\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anastaszor",
+                    "homepage": "https://gitlab.com/Anastaszor",
+                    "role": "developer"
+                }
+            ],
+            "description": "A tree for managing data that can be interpreted as html",
+            "homepage": "https://gitlab.com/php-extended/php-html-interface",
+            "keywords": [
+                "html",
+                "interface",
+                "php",
+                "structure",
+                "tree"
+            ],
+            "support": {
+                "issues": "https://gitlab.com/php-extended/php-html-interface/issues",
+                "source": "https://gitlab.com/php-extended/php-html-interface"
+            },
+            "time": "2021-06-06T13:53:55+00:00"
+        },
+        {
+            "name": "php-extended/php-html-object",
+            "version": "3.1.15",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/php-extended/php-html-object.git",
+                "reference": "955254ffdf2f9fcbfb80475e0c4761420f19b04f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/php-extended%2Fphp-html-object/repository/archive.zip?sha=955254ffdf2f9fcbfb80475e0c4761420f19b04f",
+                "reference": "955254ffdf2f9fcbfb80475e0c4761420f19b04f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "php-extended/php-html-interface": "^3",
+                "php-extended/polyfill-php80-stringable": ">=1"
+            },
+            "require-dev": {
+                "php-extended/placeholder-phpunit": ">=1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpExtended\\Html\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anastaszor",
+                    "homepage": "https://gitlab.com/Anastaszor",
+                    "role": "developer"
+                }
+            ],
+            "description": "A library that implements the php-extended/php-html-interface interface library",
+            "homepage": "https://gitlab.com/php-extended/php-html-object",
+            "keywords": [
+                "html",
+                "implementation",
+                "object",
+                "php",
+                "tree"
+            ],
+            "support": {
+                "issues": "https://gitlab.com/php-extended/php-html-object/issues",
+                "source": "https://gitlab.com/php-extended/php-html-object"
+            },
+            "time": "2021-06-06T23:28:11+00:00"
+        },
+        {
+            "name": "php-extended/php-html-transformer-interface",
+            "version": "3.1.22",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/php-extended/php-html-transformer-interface.git",
+                "reference": "937f611322af7fb67a4ba8875665fc5483582d18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/php-extended%2Fphp-html-transformer-interface/repository/archive.zip?sha=937f611322af7fb67a4ba8875665fc5483582d18",
+                "reference": "937f611322af7fb67a4ba8875665fc5483582d18",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "php-extended/php-html-interface": "^3",
+                "php-extended/polyfill-php80-stringable": ">=1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpExtended\\Html\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Generic library that specifies how transforms on html nodes should be done",
+            "homepage": "https://gitlab.com/php-extended/php-html-transformer-interface",
+            "keywords": [
+                "filter",
+                "html",
+                "interface",
+                "php",
+                "transformer"
+            ],
+            "support": {
+                "issues": "https://gitlab.com/php-extended/php-html-transformer-interface/issues",
+                "source": "https://gitlab.com/php-extended/php-html-transformer-interface"
+            },
+            "time": "2021-06-06T13:58:11+00:00"
+        },
+        {
+            "name": "php-extended/php-html-transformer-script-filter",
+            "version": "3.1.15",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/php-extended/php-html-transformer-script-filter.git",
+                "reference": "882f62d7e4a479ea7600f610c06cf84740c0daae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/php-extended%2Fphp-html-transformer-script-filter/repository/archive.zip?sha=882f62d7e4a479ea7600f610c06cf84740c0daae",
+                "reference": "882f62d7e4a479ea7600f610c06cf84740c0daae",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "php-extended/php-html-object": "^3",
+                "php-extended/php-html-transformer-interface": "^3",
+                "php-extended/polyfill-php80-stringable": ">=1"
+            },
+            "require-dev": {
+                "php-extended/placeholder-phpunit": ">=1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpExtended\\Html\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anastaszor",
+                    "homepage": "https://gitlab.com/Anastaszor",
+                    "role": "developer"
+                }
+            ],
+            "description": "A filter for html trees that removes script nodes and events",
+            "homepage": "https://gitlab.com/php-extended/php-html-transformer-script-filter",
+            "keywords": [
+                "events",
+                "filter",
+                "html",
+                "php",
+                "style",
+                "transformer"
+            ],
+            "support": {
+                "issues": "https://gitlab.com/php-extended/php-html-transformer-script-filter/issues",
+                "source": "https://gitlab.com/php-extended/php-html-transformer-script-filter"
+            },
+            "time": "2021-06-06T23:28:35+00:00"
+        },
+        {
+            "name": "php-extended/polyfill-php80-stringable",
+            "version": "1.0.23",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/php-extended/polyfill-php80-stringable.git",
+                "reference": "062ec7e74a1e687f0d90e0183c4e00a0a4eac557"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/php-extended%2Fpolyfill-php80-stringable/repository/archive.zip?sha=062ec7e74a1e687f0d90e0183c4e00a0a4eac557",
+                "reference": "062ec7e74a1e687f0d90e0183c4e00a0a4eac557",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anastaszor",
+                    "homepage": "https://gitlab.com/Anastaszor",
+                    "role": "developer"
+                }
+            ],
+            "description": "A polyfill that adds the stringable interface added in php8.0 to previous versions of php",
+            "homepage": "https://gitlab.com/php-extended/polyfill-php80-stringable",
+            "keywords": [
+                "php",
+                "php8",
+                "polyfill",
+                "stringable"
+            ],
+            "support": {
+                "issues": "https://gitlab.com/php-extended/polyfill-php80-stringable/issues",
+                "source": "https://gitlab.com/php-extended/polyfill-php80-stringable"
+            },
+            "time": "2021-06-06T13:46:44+00:00"
         },
         {
             "name": "php-http/message-factory",
@@ -9050,5 +9356,5 @@
         "php": "^7.2.5"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.1.0"
 }

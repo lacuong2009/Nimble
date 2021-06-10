@@ -56,4 +56,13 @@ class CrawlerJobTest extends TestCase
 
         $this->assertEmpty($entity);
     }
+
+    public function testGetHtml()
+    {
+        $keyword = 'lego';
+
+        $job = new \App\Jobs\CrawlerJob(null, null);
+        $html = $job->getHtml($keyword);
+        $this->assertNotEmpty($html);
+    }
 }

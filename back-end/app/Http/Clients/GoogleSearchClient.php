@@ -13,7 +13,7 @@ class GoogleSearchClient extends Client
      * @var string
      *
      */
-    private $url = 'https://www.googleapis.com/customsearch/v1';
+    private $url;
 
     /**
      * @var string
@@ -33,6 +33,7 @@ class GoogleSearchClient extends Client
     {
         parent::__construct($config);
 
+        $this->url = env('GOOGLE_API_URL');
         $this->key = env('GOOGLE_API_KEY');
         $this->cx = env('GOOGLE_PARAMS_CX');
     }

@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Entities\Keyword;
 use App\Http\Clients\GoogleSearchClient;
 use App\Services\BaseService;
+use GuzzleHttp\Client;
 
 /**
  * Class CrawlerJob
@@ -58,7 +59,6 @@ class CrawlerJob extends Job
      */
     private function editKeyword(Keyword $entity)
     {
-        $google = 'https://www.google.com/search?q=' . $entity->keyword;
         $results = $this->getResults($entity->keyword);
         $summary = $results->searchInformation;
 
@@ -66,10 +66,27 @@ class CrawlerJob extends Job
         $entity->totalLinks = $this->totalLinks($results->items);
         $entity->totalResults = $summary->totalResults;
         $entity->totalResultSeconds = $summary->formattedSearchTime;
-        $res = (new GoogleSearchClient())->get($google);
-        $html = (string) $res->getBody()->getContents();
-        $entity->html = utf8_encode($html);
+        $entity->html = $this->getHtml($entity->keyword);
     }
+
+    /**
+     * @param $keyword
+     * @return string
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getHtml($keyword)
+    {
+        $client = new Client();
+        $searchLink = 'https://www.google.com/search?q=' . $keyword;
+        $response = $client->get($searchLink);
+        $html = (string) $response->getBody()->getContents();
+
+        $config = \HTMLPurifier_Config::createDefault();
+        $purifier = new \HTMLPurifier($config);
+
+        return $purifier->purify(utf8_encode($html));
+    }
+
 
     /**
      * @param $items
@@ -120,7 +137,7 @@ class CrawlerJob extends Job
      * @return object
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    private function getResults($keyword)
+    private function getResults($keyword) : object
     {
         $client = new GoogleSearchClient();
         $json = $client->search($keyword);
