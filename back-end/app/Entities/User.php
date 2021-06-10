@@ -61,6 +61,11 @@ class User extends BaseEntity implements AuthenticatableContract, CanResetPasswo
     protected $rememberToken;
 
     /**
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="Keyword", mappedBy="user")
+     **/
+    protected $keyword;
+
+    /**
      * @return string
      */
     public function getEmailForPasswordReset()

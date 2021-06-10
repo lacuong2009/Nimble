@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Entities\Keyword;
 use App\Entities\QueueKeyword;
+use App\Helpers\UserHelper;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -67,7 +68,10 @@ class KeywordRepository extends EntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
         $query = $qb->select('k')
             ->from(Keyword::class, 'k')
-            ->where('1=1');
+            ->where(
+                $qb->expr()->eq('k.user', ':user')
+            )
+            ->setParameter('user', UserHelper::getUser());
 
         if (!empty($criteria->keyword)) {
             $query->andWhere(

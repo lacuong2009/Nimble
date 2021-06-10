@@ -19,7 +19,7 @@ class QueueKeyword extends BaseEntity
     protected $id;
 
     /**
-     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="Keyword", inversedBy="Queue")
+     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="Keyword", inversedBy="queue")
      **/
     protected $keyword;
 }

@@ -5,6 +5,7 @@ use App\Common\Reader\Adapter;
 use App\Entities\Keyword;
 use App\Exceptions\NotFoundException;
 use App\Helpers\KeywordHelper;
+use App\Helpers\UserHelper;
 use App\Jobs\CrawlerJob;
 use App\Repositories\KeywordRepository;
 use App\Utility;
@@ -75,6 +76,7 @@ class KeywordService extends BaseService
             if (empty($entity)) {
                 $entity = new Keyword();
                 $entity->keyword = trim($keyword);
+
                 $this->getEntityManager()->persist($entity);
                 $this->getEntityManager()->flush($entity);
 
@@ -150,6 +152,7 @@ class KeywordService extends BaseService
      * @param $page
      * @param $limit
      * @return array
+     * @throws NotFoundException
      */
     public function search($params, $page, $limit)
     {

@@ -3,9 +3,11 @@
 namespace App\Helpers;
 
 use App\Entities\BaseEntity;
+use App\Exceptions\NotFoundException;
 use App\Models\User;
 use App\Utility;
 use Carbon\Carbon;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Class UserHelper
@@ -13,6 +15,11 @@ use Carbon\Carbon;
  */
 class UserHelper
 {
+    /**
+     * @var User
+     */
+    private static $user;
+
     /**
      * @param BaseEntity $entity
      * @return User
@@ -25,5 +32,32 @@ class UserHelper
         $model->updated = Carbon::instance($entity->updated)->toIso8601String();
 
         return $model;
+    }
+
+    /**
+     * @param BaseEntity $entity
+     */
+    public static function setUser(BaseEntity $entity)
+    {
+        static::$user = static::makeModelUser($entity);
+    }
+
+    /**
+     * @return \App\Entities\User
+     * @throws NotFoundException
+     */
+    public static function getUser() : \App\Entities\User
+    {
+        /** @var EntityManager $em */
+        $em = app(EntityManager::class);
+
+        /** @var \App\Entities\User $user */
+        $user = $em->getRepository(\App\Entities\User::class)->find(static::$user->id);
+
+        if (empty($user)) {
+            throw new NotFoundException('User not found');
+        }
+
+        return $user;
     }
 }

@@ -2,6 +2,8 @@
 
 
 namespace App\Entities;
+use App\Helpers\UserHelper;
+
 /**
  * Class Keyword
  * @package App\Entities
@@ -50,7 +52,21 @@ class Keyword extends BaseEntity
     protected $html;
 
     /**
-     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="QueueKeyword", mappedBy="Keyword", cascade={"remove"})
+     * @Doctrine\ORM\Mapping\OneToMany(targetEntity="QueueKeyword", mappedBy="keyword", cascade={"remove"})
      **/
-    protected $Queue;
+    protected $queue;
+
+    /**
+     * @Doctrine\ORM\Mapping\ManyToOne(targetEntity="User", inversedBy="keyword")
+     **/
+    protected $user;
+
+    /**
+     * @Doctrine\ORM\Mapping\PrePersist
+     */
+    public function prePersist()
+    {
+        parent::prePersist();
+        $this->user = UserHelper::getUser();
+    }
 }
