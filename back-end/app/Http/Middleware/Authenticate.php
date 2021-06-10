@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\UserHelper;
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
 
@@ -38,6 +39,8 @@ class Authenticate
         if ($this->auth->guard($guard)->guest()) {
             return response('Unauthorized.', 401);
         }
+
+        UserHelper::setUser($request->user());
 
         return $next($request);
     }
